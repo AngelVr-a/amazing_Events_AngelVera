@@ -212,7 +212,7 @@ const data = {
       <p class="card-text">${data.events[index].description}</p>
       <div class="card-footer d-flex justify-content-between align-items-center">
         <p class="card-text fs-4">$${data.events[index].price}</p>
-        <a href="./pages/details.html" class="btn btn-primary fs-5">Details</a>
+        <a href="../pages/details.html" class="btn btn-primary fs-5">Details</a>
       </div>
     </div>
   `;
