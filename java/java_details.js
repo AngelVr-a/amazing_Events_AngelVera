@@ -209,6 +209,35 @@ for (let index = 0; index < data.events.length; index++) {
 
     console.log(data.events[index]._id);
     if (data.events[index]._id == eventId) {
+
+        if (data.events[index].date >= data.currentDate) {
+            let card = document.createElement("div");
+            card.classList.add("card",  "mb-3", "w-75", "m-5", "bg-dark", "p-4");
+    
+            card.innerHTML = `
+            <div class="row g-0">
+            <div class="col-md-6 col-xl-6">
+              <img src="${data.events[index].image}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h3 class="card-title-3">Title: ${data.events[index].name}</h3>
+                <p class="card-text">Category: ${data.events[index].category}</p>
+                <p class="card-text">Place: ${data.events[index].place}</p>
+                <p class="card-text">Desciption: ${data.events[index].description}</p>
+                <p class="card-text">Capacity: ${data.events[index].capacity}</p>
+                <p class="card-text">Estimate: ${data.events[index].estimate}</p>
+                <p class="card-text">Date: ${data.events[index].date}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    `;
+    contenedor.appendChild(card);
+        }
+        else{
+            if (data.events[index].date < data.currentDate) {
+                
         let card = document.createElement("div");
         card.classList.add("card",  "mb-3", "w-75", "m-5", "bg-dark", "p-4");
 
@@ -217,21 +246,24 @@ for (let index = 0; index < data.events.length; index++) {
         <div class="col-md-6 col-xl-6">
           <img src="${data.events[index].image}" class="img-fluid rounded-start" alt="...">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="card-body">
-            <h3 class="card-title-3">${data.events[index].name}</h3>
-            <p class="card-text">${data.events[index].category}</p>
-            <p class="card-text">${data.events[index].place}</p>
-            <p class="card-text">${data.events[index].description}</p>
-            <p class="card-text">${data.events[index].capacity}</p>
-            <p class="card-text">${data.events[index].assistance}</p>
-
+            <h3 class="card-title-3">Title: ${data.events[index].name}</h3>
+            <p class="card-text">Category: ${data.events[index].category}</p>
+            <p class="card-text">Place: ${data.events[index].place}</p>
+            <p class="card-text">Desciption: ${data.events[index].description}</p>
+            <p class="card-text">Capacity: ${data.events[index].capacity}</p>
+            <p class="card-text">Assistance: ${data.events[index].assistance}</p>
+            <p class="card-text">Date: ${data.events[index].date}</p>
           </div>
         </div>
       </div>
     </div>
 `;
 contenedor.appendChild(card);
+            }
+        }
+
     }
   
 

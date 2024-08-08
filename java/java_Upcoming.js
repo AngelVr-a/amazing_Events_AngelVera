@@ -201,10 +201,10 @@ const data = {
 
     if (data.events[index].date >= data.currentDate) {
             
-    let card = document.createElement("article");
-    card.classList.add("card", "bg-dark", "text-light", "col-10", "col-md-5", "col-xl-3");
-  
- 
+      let card = document.createElement("article");
+      card.classList.add("card", "bg-dark", "text-light", "col-10", "col-md-5", "col-xl-3");
+    
+    
     card.innerHTML = `
       <img src="${data.events[index].image}" class="card-img-top w-100" alt="${data.events[index].name}">
       <div class="card-body">
@@ -212,15 +212,19 @@ const data = {
         <p class="card-text">${data.events[index].description}</p>
         <div class="card-footer d-flex justify-content-between align-items-center">
           <p class="card-text fs-4">$${data.events[index].price}</p>
-          <a href="../pages/details.html" class="btn btn-primary fs-5">Details</a>
+          <a href="../pages/details.html?id=${data.events[index]._id}" class="btn btn-primary fs-5">Details</a>
         </div>
       </div>
     `;
-
- 
-  contenedor.appendChild(card);
+  
+    
+  
+  
+    contenedor.appendChild(card);
     }
 
 
 }
+
+
 
