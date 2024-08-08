@@ -194,32 +194,47 @@ const data = {
       },
     ],
   };
-  
-  let contenedor = document.getElementById("card-contenedor");
 
-  for (let index = 0; index < data.events.length; index++) {
+const urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams);
+const eventId = urlParams.get('id');
+console.log(eventId);
+
+let contenedor = document.getElementById("card-details-more");
+
+
+for (let index = 0; index < data.events.length; index++) {
     
-    let card = document.createElement("article");
-    card.classList.add("card", "bg-dark", "text-light", "col-10", "col-md-5", "col-xl-3");
-  
-  
-  card.innerHTML = `
-    <img src="${data.events[index].image}" class="card-img-top w-100" alt="${data.events[index].name}">
-    <div class="card-body">
-      <h5 class="card-title text-center">${data.events[index].name}</h5>
-      <p class="card-text">${data.events[index].description}</p>
-      <div class="card-footer d-flex justify-content-between align-items-center">
-        <p class="card-text fs-4">$${data.events[index].price}</p>
-        <a href="./pages/details.html?id=${data.events[index]._id}" class="btn btn-primary fs-5">Details</a>
+
+
+    console.log(data.events[index]._id);
+    if (data.events[index]._id == eventId) {
+        let card = document.createElement("div");
+        card.classList.add("card",  "mb-3", "w-75", "m-5", "bg-dark", "p-4");
+
+        card.innerHTML = `
+        <div class="row g-0">
+        <div class="col-md-6 col-xl-6">
+          <img src="${data.events[index].image}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h3 class="card-title-3">${data.events[index].name}</h3>
+            <p class="card-text">${data.events[index].category}</p>
+            <p class="card-text">${data.events[index].place}</p>
+            <p class="card-text">${data.events[index].description}</p>
+            <p class="card-text">${data.events[index].capacity}</p>
+            <p class="card-text">${data.events[index].assistance}</p>
+
+          </div>
+        </div>
       </div>
     </div>
-  `;
-
+`;
+contenedor.appendChild(card);
+    }
   
 
-
-  contenedor.appendChild(card);
-
-
 }
+
 
