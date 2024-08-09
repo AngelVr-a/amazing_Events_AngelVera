@@ -194,6 +194,83 @@ const data = {
       },
     ],
   };
+
+
+document.addEventListener('DOMContentLoaded', () =>{
+  mostrarCard(data.events)
+  buscarEvent()
+})
+
+let contenedor = document.getElementById("card-contenedor");
+let search = document.getElementById("filter")
+
+function mostrarCard(events) {
+  events.forEach(event => {
+    let card = document.createElement("article");
+
+    card.classList.add("card", "bg-dark", "text-light", "col-10", "col-md-5", "col-xl-3");
+
+    card.innerHTML = `
+      <img src="${event.image}" class="card-img-top w-100 img-fixed-height" alt="${event.name}">
+      <div class="card-body">
+        <h5 class="card-title text-center">${event.name}</h5>
+        <p class="card-text">${event.description}</p>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <p class="card-text fs-4">$${event.price}</p>
+          <a href="./pages/details.html?id=${event._id}" class="btn btn-primary fs-5">Details</a>
+        </div>
+      </div>
+    `;
+  
+    contenedor.appendChild(card);
+  });
+}
+
+
+function buscarEvent() {
+  search.addEventListener("keyup", e => {
+    aplicarFiltros();
+  });
+
+  // Agregar listeners a cada checkbox
+  document.querySelectorAll('input[type="checkbox"][name="category"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      console.log(`Checkbox ${checkbox.value} has been changed to ${checkbox.checked}`);
+
+      aplicarFiltros();
+    });
+  });
+}
+
+function aplicarFiltros() {
+  limpiarHTML();
+
+  let searchText = search.value.trim().toLowerCase(); // Texto de búsqueda
+  let selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"][name="category"]:checked')).map(checkbox => checkbox.value);
+
+  
+  let filteredEvents = data.events.filter(event => {
+    const textMatch = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
+    const categoryMatch = selectedCategories.length > 0 ? selectedCategories.includes(event.category) : true;
+    console.log(categoryMatch);
+    return textMatch && categoryMatch;
+  });
+
+  mostrarCard(filteredEvents);
+}
+
+
+
+
+function limpiarHTML() {
+  while (contenedor.firstChild) {
+    contenedor.removeChild(contenedor.firstChild)
+  }
+}
+
+
+
+  /*
   
   let contenedor = document.getElementById("card-contenedor");
 
@@ -222,4 +299,6 @@ const data = {
 
 
 }
+*/
+
 
